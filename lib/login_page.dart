@@ -13,6 +13,8 @@ class _LoginPageState extends State<LoginPage> {
   final formKey = new GlobalKey<FormState>();
   String _email;
   String _password;
+
+//validate and save saves value to _email and _password
   void validateAndSave() {
     final form = formKey.currentState;
     if (form.validate()) {
