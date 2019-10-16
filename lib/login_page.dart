@@ -16,7 +16,8 @@ class _LoginPageState extends State<LoginPage> {
   void validateAndSave() {
     final form = formKey.currentState;
     if (form.validate()) {
-      print('form is valid');
+      form.save();
+      print('form is valid , email = $_email , password = $_password');
     } else {
       print('form is invalid');
     }
@@ -38,13 +39,19 @@ class _LoginPageState extends State<LoginPage> {
               new TextFormField(
                   decoration: new InputDecoration(labelText: "email"),
                   validator: (value) =>
-                      value.isEmpty ? 'email can\'t be empty' : null),
+                      value.isEmpty ? 'email can\'t be empty' : null,
+                      onSaved: (value) => _email = value,
+                      ),
+                      
               new TextFormField(
                   decoration: new InputDecoration(labelText: "password"),
                   //obsecureText to not showing password
                   obscureText: true,
                   validator: (value) =>
-                      value.isEmpty ? 'password can\'t be empty' : null),
+                      value.isEmpty ? 'password can\'t be empty' : null,
+                      onSaved: (value) => _password = value,
+                      
+                      ),
               new RaisedButton(
                 child: new Text("login", style: new TextStyle(fontSize: 20)),
                 onPressed: validateAndSave,
