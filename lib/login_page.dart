@@ -13,6 +13,9 @@ class _LoginPageState extends State<LoginPage> {
 
       String _email;
       String _password;
+      void validateAndSave() {
+        
+      }
       @override
       Widget build(BuildContext context) {
     
@@ -21,11 +24,29 @@ class _LoginPageState extends State<LoginPage> {
             title: new Text('flutter login demo'),
           ),
           body: new Container(
-            child: new Text('hello  world'),
-          ),
-        );
-      }
-  }
+            padding: EdgeInsets.all(16.0),
+            child: new Form(
+            child :Column(children: <Widget>[
+              new TextFormField(
+                decoration: new  InputDecoration(labelText: "email"),
+              ),
+              new TextFormField(
+                decoration: new InputDecoration(labelText: "password"),
+                //obsecureText to not showing password
+                obscureText: true,
+              ),
+              new RaisedButton(
+                child: new Text("login" ,style: new TextStyle(fontSize: 20 )),
+                onPressed: validateAndSave,
+                              )
+                            ],)
+                            )
+                          ),
+                        );
+                      }
+                  
+ 
+}
 
   
   
