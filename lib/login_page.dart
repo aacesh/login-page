@@ -34,20 +34,20 @@ class _LoginPageState extends State<LoginPage> {
   void validateAndSubmit() async {
     if (validateAndSave()) {
       try {
-        if (_formType == FormType.login){
-        FirebaseUser firebaseUser = (await FirebaseAuth.instance
-        .signInWithEmailAndPassword(email: _email, password: _password))
-        .user;
-            
-        print('Signed in :${firebaseUser.uid}');
-        } 
-        else {
-FirebaseUser firebaseUser = (await FirebaseAuth.instance
-.createUserWithEmailAndPassword(email: _email, password: _password))
-.user;
-            
-      
-            print('Registered in :${firebaseUser.uid}');
+        if (_formType == FormType.login) {
+          FirebaseUser firebaseUser = (await FirebaseAuth.instance
+                  .signInWithEmailAndPassword(
+                      email: _email, password: _password))
+              .user;
+
+          print('Signed in :${firebaseUser.uid}');
+        } else {
+          FirebaseUser firebaseUser = (await FirebaseAuth.instance
+                  .createUserWithEmailAndPassword(
+                      email: _email, password: _password))
+              .user;
+
+          print('Registered in :${firebaseUser.uid}');
         }
       } catch (e) {
         print("error is $e");
@@ -104,39 +104,32 @@ FirebaseUser firebaseUser = (await FirebaseAuth.instance
     ];
   }
 
-  List<Widget> buildSubmitButtons(){
-
-    if(_formType == FormType.login){
-    return[
-      new RaisedButton(
-        child:
-            new Text("login", style: new TextStyle(fontSize: 20)),
-        onPressed: validateAndSubmit,
-      ),
-      new FlatButton(
-        child: new Text('create an account',
-            style: new TextStyle(fontSize: 20.0)),
-        onPressed: moveToRegister,
-      )
-    ];
+  List<Widget> buildSubmitButtons() {
+    if (_formType == FormType.login) {
+      return [
+        new RaisedButton(
+          child: new Text("login", style: new TextStyle(fontSize: 20)),
+          onPressed: validateAndSubmit,
+        ),
+        new FlatButton(
+          child: new Text('create an account',
+              style: new TextStyle(fontSize: 20.0)),
+          onPressed: moveToRegister,
+        )
+      ];
+    } else {
+      return [
+        new RaisedButton(
+          child:
+              new Text("create an account", style: new TextStyle(fontSize: 20)),
+          onPressed: validateAndSubmit,
+        ),
+        new FlatButton(
+          child: new Text('have an account? login',
+              style: new TextStyle(fontSize: 20.0)),
+          onPressed: moveTologin,
+        )
+      ];
+    }
   }
-  else{
-     return[
-      new RaisedButton(
-        child:
-            new Text("create an account", style: new TextStyle(fontSize: 20)),
-        onPressed: validateAndSubmit,
-      ),
-      new FlatButton(
-        child: new Text('have an account? login',
-            style: new TextStyle(fontSize: 20.0)),
-        onPressed: moveTologin,
-              )
-            ];
-        
-          }
-          }
-        
-        
-  
 }
