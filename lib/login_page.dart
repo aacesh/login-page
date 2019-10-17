@@ -36,14 +36,17 @@ class _LoginPageState extends State<LoginPage> {
       try {
         if (_formType == FormType.login){
         FirebaseUser firebaseUser = (await FirebaseAuth.instance
-                .signInWithEmailAndPassword(email: _email, password: _password))
-            .user;
+        .signInWithEmailAndPassword(email: _email, password: _password))
+        .user;
+            
         print('Signed in :${firebaseUser.uid}');
         } 
         else {
 FirebaseUser firebaseUser = (await FirebaseAuth.instance
-                .createUserWithEmailAndPassword(email: _email, password: _password))
-            .user;
+.createUserWithEmailAndPassword(email: _email, password: _password))
+.user;
+            
+      
             print('Registered in :${firebaseUser.uid}');
         }
       } catch (e) {
@@ -96,7 +99,7 @@ FirebaseUser firebaseUser = (await FirebaseAuth.instance
         //obsecureText to not showing password
         obscureText: true,
         validator: (value) => value.isEmpty ? 'password can\'t be empty' : null,
-        onSaved: (value) => _password = value,
+        onSaved: (value) => _password = value.trim(),
       ),
     ];
   }
